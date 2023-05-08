@@ -5,44 +5,45 @@ export default function Form() {
     const [skills, setSkills] = useState([]);
 
     function handleChange(event) {
-        setFormData({ ...formData, [event.target.name]: [event.target.value] });
-        //formData is spreaded so that the existing elemets in the object does not get deleted.
-        console.log(event.target.value);
-    }
-    function handleCheckboxChange(event) {
-        let updatedSkills;
-        if (event.target.checked) {
-            /*if checked add the event.target.name to the updatedSkills and then to skills.
+        const { name, value, type, checked } = event.target;
+
+        if (type === 'checkbox') {
+            let updatedSkills;
+            if (checked) {
+                /*if checked add the event.target.name to the updatedSkills and then to skills.
             if unchecked delete the event.target.name from updatedSkills and skills*/
-            updatedSkills = [...skills, event.target.value];
-        } else {
-            updatedSkills = skills.filter((skills) => skills !== event.target.value);
-            /*skills array is filtered to create a new array with all the elemets in skill except the event.target.name
+                updatedSkills = [...skills, value];
+            } else {
+                updatedSkills = skills.filter((skills) => skills !== value);
+                /*skills array is filtered to create a new array with all the elemets in skill except the event.target.name
             to eleminate the event.target.name since it is unchecked.*/
+            }
+            setSkills(updatedSkills);
+            setFormData({ ...formData, skills: updatedSkills });
+        } else {
+            setFormData({ ...formData, [name]: [value] });
+            //formData is spreaded so that the existing elemets in the object does not get deleted.
         }
-        setSkills(updatedSkills);
-        setFormData({ ...formData, skills: updatedSkills });
     }
     console.log(formData, "===formData");
-    console.log(skills, "===skills");
+    // console.log(skills, "===skills");
 
     function handleSubmit(event) {
-        preventDefault();
-        console.log(event.target.value);
-        setFormData({});
+        event.preventDefault();
+        alert(formData.json);
     }
 
     return (
         <div className="form-container">
-            <form onSubmit={handleSubmit}>
+            <form id="form" onSubmit={handleSubmit} noValidate>
                 <h2>Registration Form</h2>
                 <div className="input-section">
                     <label htmlFor="firstName">First Name</label>
-                    <input type="text" name="firstName" id="firstName" onChange={handleChange} />
+                    <input type="text" name="firstName" id="firstName" onChange={handleChange} required />
                 </div>
                 <div className="input-section">
                     <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" onChange={handleChange} />
+                    <input type="email" name="email" id="email" onChange={handleChange} required />
                 </div>
                 <div className="radio-main">
                     <label htmlFor="gender">Gender</label>
@@ -67,20 +68,20 @@ export default function Form() {
                                 name="skills"
                                 id="javaScript"
                                 value="JavaScript"
-                                onChange={handleCheckboxChange}
+                                onChange={handleChange}
                             />
                             <label htmlFor="javaScript">JavaScript</label>
                         </div>
                         <div className="checkbox-inner-container">
-                            <input type="checkbox" name="skills" id="css" value="css" onChange={handleCheckboxChange} />
+                            <input type="checkbox" name="skills" id="css" value="css" onChange={handleChange} />
                             <label htmlFor="css">CSS</label>
                         </div>
                         <div className="checkbox-inner-container">
-                            <input type="checkbox" name="skills" id="php" value="PHP" onChange={handleCheckboxChange} />
+                            <input type="checkbox" name="skills" id="php" value="PHP" onChange={handleChange} />
                             <label htmlFor="php">PHP</label>
                         </div>
                         <div className="checkbox-inner-container">
-                            <input type="checkbox" name="skills" id="html" value="HTML" onChange={handleCheckboxChange} />
+                            <input type="checkbox" name="skills" id="html" value="HTML" onChange={handleChange} />
                             <label htmlFor="html">HTML</label>
                         </div>
                     </div>
@@ -88,7 +89,7 @@ export default function Form() {
                 <div className="country-container">
                     <label htmlFor="country">Country</label>
                     <div className="select-container">
-                        <select name="country" id="country" onChange={handleChange}>
+                        <select name="country" id="country" onChange={handleChange} required>
                             <option value="select">SELECT</option>
                             <option value="INDIA">INDIA</option>
                             <option value="UAE">UAE</option>
@@ -97,7 +98,7 @@ export default function Form() {
                         </select>
                     </div>
                 </div>
-                <button id="submit" type="submit">
+                <button id="submit" form="form" type="submit">
                     Submit
                 </button>
             </form>

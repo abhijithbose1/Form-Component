@@ -22,9 +22,9 @@
 .app-close-container > h1 {
     color: rgb(115, 85, 223);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
-  .app-close-container > h2 {
-  font-family: Arial, Helvetica, sans-serif;
+}
+.app-close-container > h2 {
+    font-family: Arial, Helvetica, sans-serif;
     color: rgb(115, 85, 223);
     padding: 0;
 }
@@ -45,6 +45,7 @@
     background: #fffeeb88;
     /* min-height: 500px; */
     border-radius: 15px;
+    box-shadow: 1px 1px 20px 1px rgba(101, 101, 101, 0.723);
     display: flex;
     justify-content: center;
 }
@@ -69,10 +70,16 @@ form {
 .input-section input {
     padding: 0.4rem 0.5rem;
     width: 150px;
-    background: white;
-    color: crimson;
-    font-size: 14px;
-    border: 1px solid green;
+    border: 0;
+    background: rgba(255, 255, 255, 0);
+    border-bottom: 1px solid rgb(44, 44, 44);
+    color: orangered;
+    font-size: 15px;
+    /* border: 1px solid green; */
+}
+.input-section input:focus{
+  border-bottom: 1px solid green;
+  outline: 0;
 }
 .input-section > label {
     background: transparent;
@@ -91,6 +98,7 @@ form {
 }
 .radio-content label {
     color: grey;
+    cursor: pointer;
 }
 input[type="radio"] {
     -webkit-appearance: none;
@@ -101,7 +109,7 @@ input[type="radio"] {
     border: 1px grey solid;
     outline: none;
     cursor: pointer;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.184);
 }
 input[type="radio"]:checked {
     background-color: #00ff00;
@@ -118,7 +126,7 @@ input[type="checkbox"] {
     border: 1px solid grey;
     border-radius: 50%;
     cursor: pointer;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.21);
 }
 
 input[type="checkbox"]:checked {
@@ -145,6 +153,7 @@ input[type="checkbox"]:checked + label {
 }
 .checkbox-content label {
     color: grey;
+    cursor: pointer;
 }
 .country-container {
     display: flex;
@@ -170,23 +179,11 @@ form #submit {
 form #submit:hover {
     background: green;
 }
-/* form #close {
-    border: 0;
-    color: rgba(220, 79, 107, 0.537);
-    font-size: 20px;
-    font-weight: bold;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: transparent;
-}
-form #close:hover {
-    color: red;
-} */
 .app-form-inner-container #close-form {
     border: 0;
     color: rgba(220, 79, 107, 0.537);
     font-size: 20px;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     position: absolute;
     top: 0;
