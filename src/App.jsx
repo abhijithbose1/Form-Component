@@ -6,25 +6,21 @@ import Form from "./components/Form";
 
 function App() {
     const [form, setForm] = useState(false);
-    const [button, setButton] = useState(true);
+    const [home, setHome] = useState(true);
 
-    function openForm() {
+    function toggleHome() {
         setForm(!form);
-        setButton(!button);
-    }
-    function closeForm() {
-        setForm(!form);
-        setButton(!button);
+        setHome(!home);
     }
 
     return (
         <div className="app-main-container">
             <div className="app-form-container">
-                {button && (
+                {home && (
                     <div className="app-close-container">
                         <h1>Thanks for visiting</h1>
                         <h2>Register for getting all the updates</h2>
-                        <button id="open-form" onClick={openForm}>
+                        <button id="open-form" onClick={toggleHome}>
                             Register Here!
                         </button>
                     </div>
@@ -33,7 +29,7 @@ function App() {
                     <div className="app-form-inner-container">
                         {" "}
                         <Form />{" "}
-                        <button onClick={closeForm} id="close-form">
+                        <button onClick={toggleHome} id="close-form">
                             X
                         </button>{" "}
                     </div>
