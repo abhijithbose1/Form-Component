@@ -2,9 +2,7 @@
     height: 100vh;
     width: 100vw;
 }
-/* .blur-background {
-  filter: blur(5px);
-} */
+
 .app-main-container {
     width: 100%;
     background-image: url(./assets/images/bg-image.jpg);
@@ -43,7 +41,6 @@
 .form-container {
     width: 400px;
     background: #fffeeb88;
-    /* min-height: 500px; */
     border-radius: 15px;
     box-shadow: 1px 1px 20px 1px rgba(101, 101, 101, 0.723);
     display: flex;
@@ -67,7 +64,6 @@ form {
     color: red;
     font-weight: 400;
 }
-
 .input-section {
     display: flex;
     width: 300px;
@@ -83,7 +79,6 @@ form {
     border-bottom: 1px solid rgb(44, 44, 44);
     color: orangered;
     font-size: 15px;
-    /* border: 1px solid green; */
 }
 .input-section input:focus {
     border-bottom: 1px solid green;
@@ -151,7 +146,6 @@ input[type="checkbox"]:checked + label {
     width: 300px;
     justify-content: space-between;
     position: relative;
-    /* background: #000; */
 }
 .checkbox-content {
     display: flex;
@@ -159,7 +153,6 @@ input[type="checkbox"]:checked + label {
     align-items: flex-start;
     width: 105px;
     margin-right: 50px;
-    /* background: #000; */
 }
 .checkbox-content label {
     color: grey;
@@ -184,11 +177,10 @@ input[type="checkbox"]:checked + label {
 form #submit {
     margin: 25px 0px;
     padding: 10px 50px;
-    background: rgba(0, 128, 0, 0.567);
     border: 0;
 }
 form #submit:hover {
-    background: green;
+    box-shadow: 0px 0px 1px 1px green;
 }
 .app-form-inner-container #close-form {
     border: 0;

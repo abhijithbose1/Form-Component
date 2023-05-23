@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Form() {
+export function Form() {
     const [formData, setFormData] = useState({
         firstName: "",
         email: "",
@@ -43,22 +43,11 @@ export default function Form() {
         country: false,
     });
 
-    //!blur function to be completed
-    // function handleBlur(event) {
-    //     const { name, value } = event.target;
-    //     let error = {
-    //         firstName: false,
-    //         email: false,
-    //         gender: false,
-    //         skills: false,
-    //         country: false,
-    //     };
-    //     if (value === "") {
-    //         error={...errorFields,[name]: true};
-    //         console.log(error);
-      
-    //     setErrorFields(error);
-    // }
+    //blur function to be completed
+    function handleBlur(event) {
+        const { name, value } = event.target;
+        setErrorFields({ ...errorFields, [name]: value === "" ? true : false });
+    }
 
     function isFormValid() {
         let error = {
@@ -86,11 +75,13 @@ export default function Form() {
 
         setErrorFields(error);
 
-        if (Object.values(error).some((prev) => prev != true)) {
-            return true;
+        if (Object.values(error).some((prev) => prev === true)) {
+            return false;
         }
-        return false;
+        return true;
     }
+
+    const [buttonClicked, setButtonClicked] = useState(false);
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -98,8 +89,11 @@ export default function Form() {
             console.log("Form successfully submitted");
         } else {
             console.log("Form not Submitted");
+            setButtonClicked(true);
+            setTimeout(() => {
+                setButtonClicked(false);
+            }, 1000);
         }
-        // alert(formData.json);
     }
 
     return (
@@ -107,17 +101,17 @@ export default function Form() {
             <form id="form" onSubmit={handleSubmit} noValidate>
                 <h2>Registration Form</h2>
                 <div className="input-section">
-                    <label htmlFor="firstName">First Name</label>
+                    <label htmlFor="firstName">First Name*</label>
                     <input type="text" name="firstName" id="firstName" onChange={handleChange} onBlur={handleBlur} />
                     {errorFields.firstName && <p className="danger">First Name is required</p>}
                 </div>
                 <div className="input-section">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">Email*</label>
                     <input type="email" name="email" id="email" onChange={handleChange} onBlur={handleBlur} />
                     {errorFields.email && <p className="danger">Email is required</p>}
                 </div>
                 <div className="radio-main">
-                    <label htmlFor="gender">Gender</label>
+                    <label htmlFor="gender">Gender*</label>
                     {errorFields.gender && <p className="danger">Gender is required</p>}
                     <div className="radio-content">
                         <div className="radio-container">
@@ -127,7 +121,6 @@ export default function Form() {
                                 id="male"
                                 value="male"
                                 onChange={handleChange}
-                                onBlur={handleBlur}
                             />
                             <label htmlFor="male">Male</label>
                         </div>
@@ -138,14 +131,13 @@ export default function Form() {
                                 id="female"
                                 value="female"
                                 onChange={handleChange}
-                                onBlur={handleBlur}
                             />
                             <label htmlFor="female">Female</label>
                         </div>
                     </div>
                 </div>
                 <div className="checkbox-container">
-                    <label htmlFor="skills">Skills</label>
+                    <label htmlFor="skills">Skills*</label>
                     {errorFields.skills && <p className="danger">Skills is required</p>}
 
                     <div className="checkbox-content">
@@ -156,7 +148,6 @@ export default function Form() {
                                 id="javaScript"
                                 value="JavaScript"
                                 onChange={handleChange}
-                                onBlur={handleBlur}
                             />
                             <label htmlFor="javaScript">JavaScript</label>
                         </div>
@@ -167,7 +158,6 @@ export default function Form() {
                                 id="css"
                                 value="css"
                                 onChange={handleChange}
-                                onBlur={handleBlur}
                             />
                             <label htmlFor="css">CSS</label>
                         </div>
@@ -178,7 +168,6 @@ export default function Form() {
                                 id="php"
                                 value="PHP"
                                 onChange={handleChange}
-                                onBlur={handleBlur}
                             />
                             <label htmlFor="php">PHP</label>
                         </div>
@@ -189,17 +178,16 @@ export default function Form() {
                                 id="html"
                                 value="HTML"
                                 onChange={handleChange}
-                                onBlur={handleBlur}
                             />
                             <label htmlFor="html">HTML</label>
                         </div>
                     </div>
                 </div>
                 <div className="country-container">
-                    <label htmlFor="country">Country</label>
+                    <label htmlFor="country">Country*</label>
                     {errorFields.country && <p className="danger">Country is required</p>}
                     <div className="select-container">
-                        <select name="country" id="country" onChange={handleChange} onBlur={handleBlur}>
+                        <select name="country" id="country" onChange={handleChange}>
                             <option value="select">SELECT</option>
                             <option value="INDIA">INDIA</option>
                             <option value="UAE">UAE</option>
@@ -208,7 +196,12 @@ export default function Form() {
                         </select>
                     </div>
                 </div>
-                <button id="submit" form="form" type="submit">
+                <button
+                    id="submit"
+                    form="form"
+                    type="submit"
+                    style={{ backgroundColor: buttonClicked ? "red" : "rgba(0, 128, 0, 0.767)" }}
+                >
                     Submit
                 </button>
             </form>
